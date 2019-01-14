@@ -1,10 +1,15 @@
-version: "2"
+version: "3.2"
 
 services:
   app_python:
     # env_file: "${env_file}"
     build:
         context: ./app_python/
+    volumes:
+      - type: bind
+        target: /app_python/app/lambda_function.py
+    restart: always
+
   dynamo:
     image: dwmkerr/dynamodb
     command: "-sharedDb"
